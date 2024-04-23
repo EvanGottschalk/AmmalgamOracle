@@ -1,0 +1,242 @@
+.mintgui {
+  margin-top: 5%;
+  text-align: center;
+  display: flex;
+  font-family: monospace;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.mintguiSideContainer {
+  flex: 1; /* Each half takes up half of the container's width */
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+}
+
+.mintguiLeftContainer {
+  margin-left: 5vw;
+}
+
+.mintguiRightContainer {
+  background-color: #000000;
+  width: 40vw;
+  padding: 10% 0% 10% 0%;
+  border-radius: 15px;
+}
+
+.mintguiContentContainer{
+  margin-bottom: 5%;
+}
+
+.comicCoverImage {
+  width: 30vw;
+}
+
+.descriptionImage {
+  width: 30vw;
+}
+
+
+.mintguiText {
+  color: #ffffff;
+}
+
+
+.mintguiButtonText {
+  cursor: pointer;
+  background-color: #B8C0FF;
+  border-color: #B8C0FF;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 4px;
+  padding: .75% 2% 1% 2%;
+  font-size: 25px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.mintguiButtonContainer {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100%;
+}
+
+.mintWithBaseContainer {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.mintWithBaseText {
+  font-size: 28px;
+  margin-left: 100%;
+  padding-right: 0%;
+  display: flex;
+  width: 100%;
+}
+
+.mintWithBaseImage {
+  width: 25%;
+  padding: 2% 4.5% 2% 3.5%;
+  background-color: #ffffff;
+  border-radius: 30px;
+  margin-left: 5%;
+}
+
+.mintguiInfoText {
+  background-color: #000000;
+  color: #ffffff;
+  border-color: #ffffff;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 4px;
+  font-size: 22px;
+  width: 37.5%;
+  cursor: default;
+}
+
+.mintguiRightButtonText {
+  margin-left: 3%;
+}
+
+.mintguiMintButtonText {
+  width: 33%;
+  font-size: 20px;
+}
+
+.mintguiInputField {
+  width: 36.5%;
+  line-height: 27px;
+  font-size: 20px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.mintButtonContainer2 {
+  margin-bottom: 2%;
+}
+
+
+
+.mintguiTextContainer_TotalPrice {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100%;
+}
+
+
+.customPriceText {
+  font-size: 18px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.readButtonContainer {
+  padding: 3% 3% 3% 3%;
+  border-radius: 15px 15px 15px 15px;
+  border-color: #ffffff;
+  border-width: 3px;
+  border-style: solid;
+  width: 85%;
+  margin-left: 4%;
+}
+
+.mintguiReadText {
+  width: 40%;
+  font-size: 25px;
+}
+
+
+
+@media only screen and (max-width: 560px) {
+  .mintgui {
+    flex-direction: column;
+  }
+
+  .mintguiLeftContainer {
+    margin-left: 10vw;
+    margin-bottom: 10%;
+  }
+
+  .mintguiRightContainer {
+    width: 90vw;
+    margin-left: 5vw;
+  }
+
+  .comicCoverImage {
+    width: 80vw;
+  }
+
+  .descriptionImage {
+    width: 75vw;
+  }
+
+  .mintguiButtonText {
+    padding: 1.75% 3% 2% 3%;
+  }
+
+  .mintWithBaseContainer {
+    flex-direction: row;
+    margin-left: 0%;
+    margin-bottom: 5%;
+    padding-left: 0%;
+    width: 85vw;
+  }
+  
+  .mintWithBaseText {
+    width:30vw;
+    font-size: 20px;
+    margin-left: 0%;
+    padding-left: 0%;
+    margin-right: 0%;
+    padding-right: 0%;
+  }
+  
+  .mintWithBaseImage {
+    width: 20vw;
+    padding: 10% 20.5% 10% 18.5%;
+    background-color: #ffffff;
+    border-radius: 30px;
+  }
+
+  .mintguiInfoText {
+    font-size: 16.25px;
+    width: 33.5vw;
+  }
+
+  .comicDescriptionContainer {
+    margin-bottom: 10%;
+  }
+
+  .mintguiMintButtonText {
+    width: 33.5vw;
+    font-size: 3.25vw;
+  }
+
+  .mintguiInputField {
+    width: 38vw;
+    line-height: 6vw;
+    font-size: 3.25vw;
+  }
+
+  .customPriceText {
+    font-size: 4vw;
+  }
+
+  .mintguiReadText {
+    font-size: 3.5vw;
+  }
+
+}

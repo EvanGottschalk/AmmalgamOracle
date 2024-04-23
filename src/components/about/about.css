@@ -1,0 +1,122 @@
+.about {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  padding: 10% 0% 10% 0%;
+  margin: 0% 0% 0% 0%;
+  overflow: hidden;
+}
+
+.aboutLeftContainer {
+  flex: 50%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0% 0% 0% 10%;
+}
+
+.aboutRightContainer {
+  flex: 50%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.aboutImage {
+  border-radius: 50px;
+  width: 80%;
+  align-items: left;
+  justify-content: left;
+  float: left;
+}
+
+
+.aboutTextContainer {
+  width: 100%;
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  display: flex;
+  align-items: left;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.aboutText {
+  text-align: left;
+  color: white;
+  font-size: 16px;
+}
+
+.aboutTitle {
+  font-size: 23px;
+  text-decoration: underline;
+}
+
+.aboutLink {
+  width: 45%;
+}
+
+.aboutLink:hover {
+  -webkit-transform: scale(1.10);
+  -moz-transform: scale(1.10);
+  -o-transform: scale(1.10);
+  transform: scale(1.10);
+}
+
+.aboutLink:active {
+  -webkit-transform: scale(1.15);
+  -moz-transform: scale(1.15);
+  -o-transform: scale(1.15);
+  transform: scale(1.15);
+}
+
+@media only screen and (max-width: 560px) {
+  .aboutBoxIMG {
+    width: 100%;
+  }
+  .about {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 100vw;
+    margin: 0% 0% 0% 0%;
+    padding: 15% 0% 20% 0%;
+  }
+
+  .aboutRight {
+    align-items: center;
+    justify-content: center;
+  }
+
+
+  .aboutLeftContainer {
+    padding: 0% 5% 0% 5%;
+    margin: 0% 0% 0% 0%;
+  }
+
+  .aboutTextContainer {
+    padding: 0% 0% 0% 0%;
+    margin: 0% 0% 0% 0%;
+  }
+
+  .aboutTitle {
+    font-size: 20.5px;
+  }
+
+  .aboutTagline {
+    font-size: 14px;
+  }
+
+  .aboutImage {
+    width: 90%;
+    padding: 0% 0% 0% 5%;
+    margin: 10% 0% 0% 0%;
+  }
+
+  .aboutLink {
+    width: 100%;
+  }
+
+}

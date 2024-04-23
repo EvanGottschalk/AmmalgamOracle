@@ -1,0 +1,101 @@
+.gameGUI {
+  object-fit: cover;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0% 0% 0% 0%;
+}
+
+.gameGUIContainer {
+  width: 100%;
+  object-fit: cover;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+}
+
+
+.gameSceneContainer {
+  width: 25%;
+  object-fit: cover;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+}
+
+
+.backgroundImage {
+  display: block;
+  position: relative;
+  object-fit: cover;
+  z-index: 0;
+  width: 100%;
+}
+
+.openComicButtonContainer {
+  object-fit: cover;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0% 0% 0% 0%;
+}
+
+.openComicButton {
+  width: 15%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0% 0% 0% 0%;
+  cursor: pointer;
+}
+
+
+
+.gameElement {
+  position: absolute;
+  cursor: pointer;
+  transform: translate(-50%, 37.5%);
+  transition: width 0.3s ease, height 0.3s ease;
+  display: inline-block;
+}
+
+
+.expAnimation {
+  margin: 0% 0% 0% 0%;
+  position: absolute;
+  top: 10.5%;
+  left: 55.3%;
+  height: 250px;
+}
+
+
+
+
+.playerGameInterfaceCursorImage:hover {
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -o-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+.playerGameInterfaceCursorImage:active {
+  -webkit-transform: scale(1.08);
+  -moz-transform: scale(1.08);
+  -o-transform: scale(1.08);
+  transform: scale(1.08);
+}
+
+
+
+

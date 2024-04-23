@@ -1,0 +1,208 @@
+.services {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  padding: 0% 0% 0% 0%;
+  margin: 0% 0% 0% 0%;
+  overflow: hidden;
+}
+
+.servicesLeftContainer {
+  flex: 50%;
+  display: flex;
+  align-items: right;
+  justify-content: right;
+  float: right;
+  padding: 0% 0% 0% 0%;
+}
+
+.servicesRightContainer {
+  flex: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.servicesImage {
+  width: 75%;
+  align-items: right;
+  justify-content: right;
+  float: right;
+}
+
+
+.servicesTextContainer {
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  display: flex;
+  align-items: left;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.servicesText {
+  text-align: left;
+  color: black;
+}
+
+.servicesDescription {
+  color: #444444;
+}
+
+.paypalContainer {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 0% 0% 0% 0%;
+}
+
+
+.servicesFooter {
+  background-color: #ffffff;
+
+  text-align:center;
+}
+
+.servicesFooterIconContainer {
+  position: absolute;
+  margin-top: 5.5%;
+  right: 10%;
+  max-width: 45%;
+}
+
+.servicesFooterSocialsContainer {
+
+  max-width: 1920px;
+
+}
+
+
+.servicesFooterIcon {
+  width: 8%;
+  display: inline-block;
+  margin: 0% 0% 0% 4%;
+  padding: 0% 0% 0% 0%;
+}
+
+
+.twitterServicesFooterIcon {
+    padding: 0% 0% 0% 0%;
+    margin: 0% 0% 0% 0%;
+    width: 12%;
+}
+
+.linkedinServicesFooterIcon {
+  padding: 0% 2.5% 1.5% 0%;
+}
+
+.instagramServicesFooterIcon {
+  padding: 0% 0% 1.5% 0%;
+}
+
+.linkToTokenMetrics {
+  color: #0000ff;
+  text-decoration: underline !important;
+}
+
+.tokenMetricsCTA {
+  padding: 5% 0% 0% 0%;
+}
+
+.servicesLink:hover,
+.servicesFooterIcon:hover {
+  -webkit-transform: scale(1.10);
+  -moz-transform: scale(1.10);
+  -o-transform: scale(1.10);
+  transform: scale(1.10);
+}
+
+.servicesLink:active,
+.servicesFooterIcon:active {
+  -webkit-transform: scale(1.15);
+  -moz-transform: scale(1.15);
+  -o-transform: scale(1.15);
+  transform: scale(1.15);
+}
+
+@media only screen and (max-width: 560px) {
+  .servicesBoxIMG {
+    width: 100%;
+  }
+  .services {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 100vw;
+    margin: 0% 0% 0% 0%;
+    padding: 0% 0% 0% 0%;
+  }
+  .servicesBox {
+    border-radius: 12px;
+    width: 100%;
+    max-width: 630px;
+  }
+  .servicesRightContainer {
+    background-color: black;
+  }
+  .servicesTextContainer {
+    padding: 7% 0% 0% 4%;
+    margin: 0% 0% 0% 0%;
+    color: white;
+  }
+  
+  .servicesText {
+    color: white;
+    padding: 0% 0% 0% 0%;
+    margin: 0% 0% 0% 0%;
+  }
+
+  .servicesDescription {
+    color: #cccccc;
+  }
+
+  .servicesLink {
+    width: 100%;
+  }
+
+  .paypalContainer {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 0% 0% 18% 25%;
+    font-size: 11.6px;
+  }
+
+  .servicesFooterIconContainer {
+    position: relative;
+    padding-top: 20%;
+    padding-bottom: 20%;
+    right: 0%;
+    max-width: 100%;
+  }
+  
+
+  
+  
+  .servicesFooterIcon {
+    width: 15%;
+    display: inline-block;
+    margin: 0% 0% 0% 4%;
+    padding: 0% 0% 0% 0%;
+  }
+  
+  
+  .twitterServicesFooterIcon {
+      padding: 0% 0% 0% 0%;
+      margin: 0% 0% 0% 0%;
+      width: 22%;
+  }
+  
+  .linkedinServicesFooterIcon {
+    padding: 0% 3.5% 3% 0%;
+  }
+  
+  .instagramServicesFooterIcon {
+    padding: 0% 0% 3% 0%;
+  }
+}
