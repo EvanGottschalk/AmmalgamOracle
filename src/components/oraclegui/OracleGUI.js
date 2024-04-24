@@ -11,7 +11,7 @@ import { getOpenSeaLink } from '../../scripts/SmartContractOperator';
 import './oraclegui.css'
 
 var opensea_link = '';
-var symbol = 'BTCUSD';
+var symbol = 'ETH';
 
 const OracleGUI = () => {
 
@@ -28,7 +28,7 @@ const OracleGUI = () => {
       script.innerHTML = `
         {
           "autosize": true,
-          "symbol": "COINBASE:BTCUSD",
+          "symbol": "COINBASE:ETHUSD",
           "interval": "D",
           "timezone": "Etc/UTC",
           "theme": "dark",
@@ -121,7 +121,7 @@ const OracleGUI = () => {
     } else if(event.target.id === 'viewOnOpenseaText') {
       window.open(opensea_link, '_blank');
     };
-    await updateTotalMinted();
+    // await updateTotalMinted();
   };
 
   async function executeMint(amount, mint_button) {
@@ -145,24 +145,18 @@ const OracleGUI = () => {
     await setAddress_Context(user_address);
     user_balance = user_wallet_info['balance'];
     await setContractName_Context(contract_name);
-    await showMintUI();
+    await updateGUI();
   };
 
 
-  async function showMintUI() {
-    document.getElementById('connectButtonContainer').style.display = 'none';
-    document.getElementById('infoButtonContainer').style.display = 'flex';
+  async function updateGUI() {
+    document.getElementById('connectButtonText').textContent = 'Connected: ' + user_address.substr(0, 4) + "..." + user_address.substr(-4, 4);
+    document.getElementById('totalMintedText').textContent = symbol + ': ' + user_balance.toString().substr(0, 7);
     document.getElementById('mintButtonContainer1').style.display = 'flex';
     document.getElementById('mintButtonContainer2').style.display = 'flex';
     document.getElementById('customPriceContainer').style.display = 'flex';
   };
   
-
-  async function updateTotalMinted() {
-    const total_minted_display = document.getElementById('totalMintedText');
-    total_minted = await runContractFunction(contract_name, 'getCurrentSupply');
-    total_minted_display.textContent = 'Total Minted: ' + total_minted.toString();
-  };
 
 
 
@@ -206,10 +200,10 @@ const OracleGUI = () => {
               <img data-aos="fade-left" src={base_logo_image} alt='Mint with Base' id='mintWithBaseImage' className='mintWithBaseImage oracleguiImage horizontalImage smallImage' />
             </div>
           </div> */}
-          <div style={(user_address) ? {display: "flex"} : {display: "none"}} id='infoButtonContainer' className='infoButtonContainer oracleguiContentContainer_Right oracleguiContentContainer contentContainer'>
+          <div id='infoButtonContainer' className='infoButtonContainer oracleguiContentContainer_Right oracleguiContentContainer contentContainer'>
             <div id='oracleguiButtonContainer_Info' className='oracleguiButtonContainer_Info oracleguiButtonContainer buttonContainer'>
               <span data-aos="fade-left" onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} id='mintPriceText' className='mintPriceText oracleguiInfoText oracleguiText oracleguiButtonText buttonText'>
-                Mint Price: .01 ETH
+                ETH Price: $????
               </span>
               <span data-aos="fade-left" onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} id='totalMintedText' className='totalMintedText oracleguiInfoText oracleguiText oracleguiButtonText buttonText oracleguiRightButtonText'>
                 Total Minted:

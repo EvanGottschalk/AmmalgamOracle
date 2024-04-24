@@ -16,6 +16,12 @@
 
 .oracleguiLeftContainer {
   margin-left: 3vw;
+  border-radius: 15px;
+  border-color: #00ECC3;
+  border-width: 2px;
+  border-style: solid;
+  position: relative;
+  padding: 2% 2% 0% 2%;
 }
 
 .oracleguiRightContainer {
@@ -23,9 +29,9 @@
   width: 40vw;
   padding: 3% 0% 10% 0%;
   border-radius: 15px;
-  border-color: #00ECC3 !important;
-  border-width: 2px !important;
-  border-style: solid !important;
+  border-color: #00ECC3;
+  border-width: 2px;
+  border-style: solid;
   position: relative;
 }
 
@@ -59,8 +65,9 @@
 
 .oracleguiButtonText {
   cursor: pointer;
-  background-color: #B8C0FF;
-  border-color: #B8C0FF;
+  color: #000000;
+  background-color: #00ECC3;
+  border-color: #00ECC3;
   border-width: 2px;
   border-style: solid;
   border-radius: 4px;
