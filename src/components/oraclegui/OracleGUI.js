@@ -105,6 +105,7 @@ const OracleGUI = () => {
 
   async function onMouseClick(event) {
     await setUserWalletInfo();
+    token_balance = user_balance;
     await updateGUI();
   };
 
@@ -139,7 +140,6 @@ const OracleGUI = () => {
 
 
   async function getTokenBalance(user_balances, symbol) {
-    console.log(user_balances);
     if (symbol.toUpperCase() === 'ETH') {
       token_balance = user_balance;
       return token_balance;
