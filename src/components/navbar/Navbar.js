@@ -116,7 +116,7 @@ return (
       <div className='navbarRight'>
         <div className='navbarSocialsContainer'>
           <div className='navbarIconContainer'>
-            <a href='https://www.instagram.com/melioraapp/' target="_blank">
+            <a href='https://www.instagram.com/evanonearth_eth/' target="_blank">
               <img data-aos="fade-down-left" src={instagram_icon} onMouseOver={mouseover} onMouseLeave={mouseleave} id='instagramIcon' className='navbarIcon instagramIcon' alt='@MelioraFun'/>
             </a>
             {/* <a href='https://www.linkedin.com/in/evan-gottschalk/' target="_blank">
@@ -125,7 +125,7 @@ return (
             <a href='https://nofunz.one/discord/' target="_blank">
               <img data-aos="fade-down" src={discord_icon} onMouseOver={mouseover} onMouseLeave={mouseleave} id='discordIcon' className='navbarIcon discordIcon' alt='Join Discord'/>
             </a>
-            <a href='https://twitter.com/melioraFun' target="_blank">
+            <a href='https://twitter.com/evanonearth_eth' target="_blank">
               <img data-aos="fade-down-right" src={twitter_icon} onMouseOver={mouseover} onMouseLeave={mouseleave} id='twitterIcon' className='navbarIcon twitterIcon' alt='@MelioraFun'/>
             </a>
           </div>
