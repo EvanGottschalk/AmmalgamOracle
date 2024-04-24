@@ -4,14 +4,23 @@ import SmartContractContext from '../../scripts/SmartContractContext';
 import Aos from "aos";
 import "aos/dist/aos.css";
 
+import Moralis from 'moralis';
+
 import { connectWallet, runContractFunction } from '../../scripts/SmartContractOperator';
 import { getOpenSeaLink } from '../../scripts/SmartContractOperator';
 
 
-import './oraclegui.css'
+import './oraclegui.css';
+
+require('dotenv').config();
+
+
+let MORALIS_API_KEY = process.env.MORALIS_API_KEY;
 
 var opensea_link = '';
 var symbol = 'ETH';
+var user_balances = {};
+var token_balance = 0;
 
 const OracleGUI = () => {
 
@@ -53,7 +62,7 @@ const OracleGUI = () => {
   let { user_avatar_URI, setAvatarURI_Context } = useContext(SmartContractContext);
   let { contract_name, setContractName_Context } = useContext(SmartContractContext);
 
-  network_name = 'base';
+  // network_name = 'mainnet';
   contract_name = 'MelioraComicV1';
   user_address = false;
   var total_minted = 0; //runContractFunction(contract_name, 'getTotalSupply');
@@ -68,7 +77,7 @@ const OracleGUI = () => {
     element.style.transform = 'scale(1.0)';
   };
 
-  function handleFieldChange(event) {
+  async function handleFieldChange(event) {
     if (event.target.id === "tokenInputField") {
       const trading_view_container = document.getElementById("tradingViewContainer");
       while (trading_view_container.firstChild) {
@@ -94,48 +103,16 @@ const OracleGUI = () => {
           "support_host": "https://www.tradingview.com"
         }`;
       container.current.appendChild(script);
-    } else {
-      const current_amount_entry = event.target.value;
-      const current_total_price = parseFloat(current_amount_entry) * 0.01;
-      if (current_amount_entry > 0) {
-        document.getElementById('customPriceText').textContent = `Total Price: ${current_total_price} ETH`;
-      } else {
-        document.getElementById('customPriceText').textContent = `Total Price: 0.0 ETH`;
-      };
+      token_balance = await getTokenBalance(user_balances, symbol);
+      await updateGUI();
     };
   };
 
   async function onMouseClick(event) {
     await setUserWalletInfo();
-    const mint_button = document.getElementById(event.target.id);
-    if (event.target.id === 'mint1Text') {
-      await executeMint(1, mint_button);
-    } else if (event.target.id === 'mint5Text') {
-      await executeMint(5, mint_button);
-    } else if (event.target.id === 'mintCustomText') {
-      if (Number(document.getElementById("mintCustomInput").value) >= 0) {
-        await executeMint(Number(document.getElementById("mintCustomInput").value), mint_button);
-      }
-    } else if(event.target.id === 'readComicText') {
-      window.open('https://bafybeictavxgorrl67f2dsvfafu4zfdhts52bg7fystxeiz2bcnxkggb6y.ipfs.nftstorage.link/#p=1', '_blank');
-    } else if(event.target.id === 'viewOnOpenseaText') {
-      window.open(opensea_link, '_blank');
-    };
-    // await updateTotalMinted();
+    await updateGUI();
   };
 
-  async function executeMint(amount, mint_button) {
-    var token_ID;
-    if (amount === 1) {
-      token_ID = await runContractFunction(contract_name, 'mint', [], mint_button);
-    } else {
-      token_ID = await runContractFunction(contract_name, 'mintBatch', [amount], mint_button);
-    }
-    console.log('token_ID', token_ID);
-    opensea_link = await getOpenSeaLink(contract_name, token_ID);
-    document.getElementById('readButtonContainer').style.display = 'flex';
-    mint_button.textContent = "Mint Success!";
-  };
 
   
   async function setUserWalletInfo() {
@@ -144,14 +121,56 @@ const OracleGUI = () => {
     user_address = user_wallet_info['address'];
     await setAddress_Context(user_address);
     user_balance = user_wallet_info['balance'];
-    await setContractName_Context(contract_name);
-    await updateGUI();
+    await setBalance_Context(user_balance);
+    user_balances = await getUserBalances();
+  };
+
+  async function getUserBalances() {
+    try {
+      await Moralis.start({
+        apiKey: MORALIS_API_KEY
+      });
+    
+      const response = await Moralis.EvmApi.token.getWalletTokenBalances({
+        "chain": "0x1",
+        "address": user_address
+      });
+    
+      return (response.raw);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
 
+  async function getTokenBalance(user_balances, symbol) {
+    console.log(user_balances);
+    if (symbol.toUpperCase() === 'ETH') {
+      token_balance = user_balance;
+      return token_balance;
+    } else {
+      for (let i = 0; i < user_balances.length; i++) {
+        console.log('symbol', symbol, user_balances[i].name);
+          if (user_balances[i].name === symbol) {
+              token_balance = user_balances[i].balance / 1000000000000000000;
+              console.log("Token Balance:", token_balance);
+              return token_balance;
+          }
+      }
+    }
+    // Return null or handle case where symbol is not found
+    return null;
+}
+
+
   async function updateGUI() {
-    document.getElementById('connectButtonText').textContent = 'Connected: ' + user_address.substr(0, 4) + "..." + user_address.substr(-4, 4);
-    document.getElementById('totalMintedText').textContent = symbol + ': ' + user_balance.toString().substr(0, 7);
+    if (user_address) {
+      document.getElementById('connectButtonText').textContent = 'Connected: ' + user_address.substr(0, 4) + "..." + user_address.substr(-4, 4);
+    };
+    document.getElementById('totalMintedText').textContent = symbol + ' Balance: ';
+    if (token_balance) {
+      document.getElementById('totalMintedText').textContent += token_balance.toString();
+    };
     document.getElementById('totalMintedText').style.display = 'flex';
   };
   
