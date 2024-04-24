@@ -1,8 +1,6 @@
 import React from 'react'
 
-// import background1 from '../../image/background1.png'
-import background2 from '../../image/background2.png'
-//import background3 from '../../image/background3.png'
+import background_image from '../../image/background.png'
 
 
 import './background.css'
@@ -23,14 +21,8 @@ const Background = () => {
   });
   return (
     <div className='background'>
-      <div className='background1Container' style={{display: 'none'}}>
-        <img src={background2} alt='' className='background1' />
-      </div>
-      <div className='background2Container' style={{display: 'none'}}>
-        <img src={background2} alt='' className='background2'/>
-      </div>
-      <div className='background3Container' style={{display: 'none'}}>
-        <img src={background2} alt='' className='background3' />
+      <div className='background1Container'>
+        <img src={background_image} alt='' className='backgroundImage' />
       </div>
     </div>
   )

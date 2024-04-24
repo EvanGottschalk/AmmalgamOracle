@@ -6,7 +6,7 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  padding: 10% 0% 0% 0%;
+  padding: 5% 0% 0% 0%;
   overflow: hidden;
   background-color: black;
 }
@@ -23,7 +23,7 @@
 
 .collectForeverBannerContainer {
   background-color: #ffffff;
-  padding-top: 5%;
+  padding-top: 10%;
 }
 
 .bannerImage {

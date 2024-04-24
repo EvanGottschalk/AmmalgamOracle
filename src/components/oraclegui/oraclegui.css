@@ -1,5 +1,5 @@
-.mintgui {
-  margin-top: 5%;
+.oraclegui {
+  margin-top: 10%;
   text-align: center;
   display: flex;
   font-family: monospace;
@@ -7,43 +7,57 @@
   overflow: hidden;
 }
 
-.mintguiSideContainer {
+.oracleguiSideContainer {
   flex: 1; /* Each half takes up half of the container's width */
   justify-content: center;
   align-items: center;
   width: 50vw;
 }
 
-.mintguiLeftContainer {
-  margin-left: 5vw;
+.oracleguiLeftContainer {
+  margin-left: 3vw;
 }
 
-.mintguiRightContainer {
-  background-color: #000000;
+.oracleguiRightContainer {
+  margin-left: 3vw;
   width: 40vw;
-  padding: 10% 0% 10% 0%;
+  padding: 3% 0% 10% 0%;
   border-radius: 15px;
+  border-color: #00ECC3 !important;
+  border-width: 2px !important;
+  border-style: solid !important;
+  position: relative;
 }
 
-.mintguiContentContainer{
+.oracleguiContentContainer{
   margin-bottom: 5%;
 }
 
-.comicCoverImage {
-  width: 30vw;
+.selectTokenText {
+  font-size: 35px;
 }
 
-.descriptionImage {
-  width: 30vw;
+.tokenInputField {
+  width: 36.5%;
+  line-height: 35px;
+  font-size: 25px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
-
-.mintguiText {
+.oracleguiText {
   color: #ffffff;
 }
 
+.tradingview-widget-container {
+  position: relative;
+  height: 70vh !important;
+}
 
-.mintguiButtonText {
+
+.oracleguiButtonText {
   cursor: pointer;
   background-color: #B8C0FF;
   border-color: #B8C0FF;
@@ -58,7 +72,7 @@
   align-items: center;
 }
 
-.mintguiButtonContainer {
+.oracleguiButtonContainer {
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -89,7 +103,7 @@
   margin-left: 5%;
 }
 
-.mintguiInfoText {
+.oracleguiInfoText {
   background-color: #000000;
   color: #ffffff;
   border-color: #ffffff;
@@ -101,16 +115,27 @@
   cursor: default;
 }
 
-.mintguiRightButtonText {
+.comicDescriptionContainer {
+  border-color: #00ECC3;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 4px;
+  width: 90%;
+  margin-left: 5%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+.oracleguiRightButtonText {
   margin-left: 3%;
 }
 
-.mintguiMintButtonText {
+.oracleguiMintButtonText {
   width: 33%;
   font-size: 20px;
 }
 
-.mintguiInputField {
+.oracleguiInputField {
   width: 36.5%;
   line-height: 27px;
   font-size: 20px;
@@ -126,7 +151,7 @@
 
 
 
-.mintguiTextContainer_TotalPrice {
+.oracleguiTextContainer_TotalPrice {
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -153,7 +178,7 @@
   margin-left: 4%;
 }
 
-.mintguiReadText {
+.oracleguiReadText {
   width: 40%;
   font-size: 25px;
 }
@@ -161,16 +186,16 @@
 
 
 @media only screen and (max-width: 560px) {
-  .mintgui {
+  .oraclegui {
     flex-direction: column;
   }
 
-  .mintguiLeftContainer {
+  .oracleguiLeftContainer {
     margin-left: 10vw;
     margin-bottom: 10%;
   }
 
-  .mintguiRightContainer {
+  .oracleguiRightContainer {
     width: 90vw;
     margin-left: 5vw;
   }
@@ -183,7 +208,7 @@
     width: 75vw;
   }
 
-  .mintguiButtonText {
+  .oracleguiButtonText {
     padding: 1.75% 3% 2% 3%;
   }
 
@@ -211,7 +236,7 @@
     border-radius: 30px;
   }
 
-  .mintguiInfoText {
+  .oracleguiInfoText {
     font-size: 16.25px;
     width: 33.5vw;
   }
@@ -220,12 +245,12 @@
     margin-bottom: 10%;
   }
 
-  .mintguiMintButtonText {
+  .oracleguiMintButtonText {
     width: 33.5vw;
     font-size: 3.25vw;
   }
 
-  .mintguiInputField {
+  .oracleguiInputField {
     width: 38vw;
     line-height: 6vw;
     font-size: 3.25vw;
@@ -235,7 +260,7 @@
     font-size: 4vw;
   }
 
-  .mintguiReadText {
+  .oracleguiReadText {
     font-size: 3.5vw;
   }
 

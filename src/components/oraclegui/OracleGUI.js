@@ -1,0 +1,267 @@
+import React, { useState, useContext, useEffect, useRef } from 'react'
+import SmartContractContext from '../../scripts/SmartContractContext';
+
+import Aos from "aos";
+import "aos/dist/aos.css";
+
+import { connectWallet, runContractFunction } from '../../scripts/SmartContractOperator';
+import { getOpenSeaLink } from '../../scripts/SmartContractOperator';
+
+
+import './oraclegui.css'
+
+var opensea_link = '';
+var symbol = 'BTCUSD';
+
+const OracleGUI = () => {
+
+
+  const container = useRef();
+
+  useEffect(
+    () => {
+      Aos.init({ duration: 1500 });
+      const script = document.createElement("script");
+      script.src = "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+      script.type = "text/javascript";
+      script.async = true;
+      script.innerHTML = `
+        {
+          "autosize": true,
+          "symbol": "COINBASE:BTCUSD",
+          "interval": "D",
+          "timezone": "Etc/UTC",
+          "theme": "dark",
+          "style": "1",
+          "locale": "en",
+          "enable_publishing": false,
+          "allow_symbol_change": true,
+          "calendar": false,
+          "support_host": "https://www.tradingview.com"
+        }`;
+      container.current.appendChild(script);
+    },
+    []
+  );
+
+
+  let { user_address, setAddress_Context } = useContext(SmartContractContext);
+  let { user_balance, setBalance_Context } = useContext(SmartContractContext);
+  let { network_name, setNetwork_Context } = useContext(SmartContractContext);
+  let { user_token_ID, setTokenID_Context } = useContext(SmartContractContext);
+  let { user_metadata, setMetadata_Context } = useContext(SmartContractContext);
+  let { user_avatar_URI, setAvatarURI_Context } = useContext(SmartContractContext);
+  let { contract_name, setContractName_Context } = useContext(SmartContractContext);
+
+  network_name = 'base';
+  contract_name = 'MelioraComicV1';
+  user_address = false;
+  var total_minted = 0; //runContractFunction(contract_name, 'getTotalSupply');
+
+  function onMouseOver(event) {
+    let element = document.getElementById(event.target.id);
+    element.style.transform = 'scale(1.10)';
+  };
+  
+  function onMouseLeave(event) {
+    let element = document.getElementById(event.target.id);
+    element.style.transform = 'scale(1.0)';
+  };
+
+  function handleFieldChange(event) {
+    if (event.target.id === "tokenInputField") {
+      const trading_view_container = document.getElementById("tradingViewContainer");
+      while (trading_view_container.firstChild) {
+        trading_view_container.removeChild(trading_view_container.firstChild);
+      };
+      symbol = event.target.value;
+      const script = document.createElement("script");
+      script.src = "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+      script.type = "text/javascript";
+      script.async = true;
+      script.innerHTML = `
+        {
+          "autosize": true,
+          "symbol": "COINBASE:${symbol}USD",
+          "interval": "D",
+          "timezone": "Etc/UTC",
+          "theme": "dark",
+          "style": "1",
+          "locale": "en",
+          "enable_publishing": false,
+          "allow_symbol_change": true,
+          "calendar": false,
+          "support_host": "https://www.tradingview.com"
+        }`;
+      container.current.appendChild(script);
+    } else {
+      const current_amount_entry = event.target.value;
+      const current_total_price = parseFloat(current_amount_entry) * 0.01;
+      if (current_amount_entry > 0) {
+        document.getElementById('customPriceText').textContent = `Total Price: ${current_total_price} ETH`;
+      } else {
+        document.getElementById('customPriceText').textContent = `Total Price: 0.0 ETH`;
+      };
+    };
+  };
+
+  async function onMouseClick(event) {
+    await setUserWalletInfo();
+    const mint_button = document.getElementById(event.target.id);
+    if (event.target.id === 'mint1Text') {
+      await executeMint(1, mint_button);
+    } else if (event.target.id === 'mint5Text') {
+      await executeMint(5, mint_button);
+    } else if (event.target.id === 'mintCustomText') {
+      if (Number(document.getElementById("mintCustomInput").value) >= 0) {
+        await executeMint(Number(document.getElementById("mintCustomInput").value), mint_button);
+      }
+    } else if(event.target.id === 'readComicText') {
+      window.open('https://bafybeictavxgorrl67f2dsvfafu4zfdhts52bg7fystxeiz2bcnxkggb6y.ipfs.nftstorage.link/#p=1', '_blank');
+    } else if(event.target.id === 'viewOnOpenseaText') {
+      window.open(opensea_link, '_blank');
+    };
+    await updateTotalMinted();
+  };
+
+  async function executeMint(amount, mint_button) {
+    var token_ID;
+    if (amount === 1) {
+      token_ID = await runContractFunction(contract_name, 'mint', [], mint_button);
+    } else {
+      token_ID = await runContractFunction(contract_name, 'mintBatch', [amount], mint_button);
+    }
+    console.log('token_ID', token_ID);
+    opensea_link = await getOpenSeaLink(contract_name, token_ID);
+    document.getElementById('readButtonContainer').style.display = 'flex';
+    mint_button.textContent = "Mint Success!";
+  };
+
+  
+  async function setUserWalletInfo() {
+    await setNetwork_Context(network_name);
+    const user_wallet_info = await connectWallet(network_name);
+    user_address = user_wallet_info['address'];
+    await setAddress_Context(user_address);
+    user_balance = user_wallet_info['balance'];
+    await setContractName_Context(contract_name);
+    await showMintUI();
+  };
+
+
+  async function showMintUI() {
+    document.getElementById('connectButtonContainer').style.display = 'none';
+    document.getElementById('infoButtonContainer').style.display = 'flex';
+    document.getElementById('mintButtonContainer1').style.display = 'flex';
+    document.getElementById('mintButtonContainer2').style.display = 'flex';
+    document.getElementById('customPriceContainer').style.display = 'flex';
+  };
+  
+
+  async function updateTotalMinted() {
+    const total_minted_display = document.getElementById('totalMintedText');
+    total_minted = await runContractFunction(contract_name, 'getCurrentSupply');
+    total_minted_display.textContent = 'Total Minted: ' + total_minted.toString();
+  };
+
+
+
+  return (
+    <div className='oraclegui'>
+      <div id='oracleguiComponentContainer' className='oracleguiComponentContainer componentContainer'>
+        <div id='oracleguiLeftContainer' className='oracleguiLeftContainer oracleguiSideContainer sideContainer leftContainer'>
+          <div id='oracleguiContentContainer_Left' className='oracleguiContentContainer_Left oracleguiContentContainer contentContainer'>
+            <div id='oracleguiImageContainer1_Comic' className='oracleguiImageContainer1_Comic imageContainer'>
+              <div className="tradingview-widget-container" id="tradingViewContainer" ref={container}>
+                <div className="tradingview-widget-container__widget" id="tradingViewChart"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='oracleguiComponentContainer' className='oracleguiComponentContainer componentContainer'>
+        <div id='oracleguiRightContainer' className='oracleguiRightContainer oracleguiSideContainer sideContainer rightContainer'>
+          <div id='comicDescriptionContainer' className='comicDescriptionContainer oracleguiContentContainer_Right oracleguiContentContainer contentContainer'>
+            <div id='oracleguiButtonContainer_Mint' className='oracleguiButtonContainer_Select oracleguiButtonContainer buttonContainer'>
+              <span data-aos="fade-left" onClick={onMouseClick} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} id='selectTokenText' className='selectTokenText oracleguiText buttonText'>
+                Select Token:
+              </span>
+              <input data-aos="fade-left" id='tokenInputField' className='tokenInputField  inputField oracleguiRightButtonText' placeholder="Enter token..." onChange={handleFieldChange} />
+            </div>
+          </div>
+          <div id='connectButtonContainer' className='connectButtonContainer oracleguiContentContainer_Right oracleguiContentContainer contentContainer'>
+            <div id='oracleguiButtonContainer_Connect' className='oracleguiButtonContainer_Connect oracleguiButtonContainer buttonContainer'>
+              <span data-aos="fade-left" onClick={onMouseClick} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} alt='Connect Wallet' id='connectButtonText' className='connectButtonText oracleguiButtonText oracleguiText buttonText'>
+                Connect Wallet
+              </span>
+            </div>
+          </div>
+          {/* <div id='mintWithBaseContainer' className='mintWithBaseContainer oracleguiContentContainer_Right oracleguiContentContainer contentContainer'>
+            <div id='oracleguiTextContainer_Base' className='oracleguiTextContainer_Base oracleguiTextContainer textContainer'>
+              <span data-aos="fade-left" id='mintWithBaseText' className='mintWithBaseText oracleguiText oracleguiFloatingText floatingText'>
+                Mint with
+              </span>
+            </div>
+            <div id='oracleguiImageContainer_Base' className='oracleguiImageContainer_Base oracleguiImageContainer imageContainer'>
+              <img data-aos="fade-left" src={base_logo_image} alt='Mint with Base' id='mintWithBaseImage' className='mintWithBaseImage oracleguiImage horizontalImage smallImage' />
+            </div>
+          </div> */}
+          <div style={(user_address) ? {display: "flex"} : {display: "none"}} id='infoButtonContainer' className='infoButtonContainer oracleguiContentContainer_Right oracleguiContentContainer contentContainer'>
+            <div id='oracleguiButtonContainer_Info' className='oracleguiButtonContainer_Info oracleguiButtonContainer buttonContainer'>
+              <span data-aos="fade-left" onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} id='mintPriceText' className='mintPriceText oracleguiInfoText oracleguiText oracleguiButtonText buttonText'>
+                Mint Price: .01 ETH
+              </span>
+              <span data-aos="fade-left" onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} id='totalMintedText' className='totalMintedText oracleguiInfoText oracleguiText oracleguiButtonText buttonText oracleguiRightButtonText'>
+                Total Minted:
+              </span>
+            </div>
+          </div>
+          <div style={(user_address) ? {display: "flex"} : {display: "none"}} id='mintButtonContainer1' className='mintButtonContainer1 oracleguiContentContainer_Right oracleguiContentContainer contentContainer'>
+            <div id='oracleguiButtonContainer_Mint' className='oracleguiButtonContainer_Mint oracleguiButtonContainer buttonContainer'>
+              <span data-aos="fade-left" onClick={onMouseClick} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} id='mint1Text' className='mint1Text oracleguiMint1Text oracleguiMintButtonText oracleguiText oracleguiButtonText buttonText'>
+                Mint 1 for .01 ETH
+              </span>
+              <span data-aos="fade-left" onClick={onMouseClick} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} id='mint5Text' className='mint5Text oracleguiMint1Text oracleguiMintButtonText oracleguiText oracleguiButtonText buttonText oracleguiRightButtonText'>
+                Mint 5 for .05 ETH
+              </span>
+            </div>
+          </div>
+          <div style={(user_address) ? {display: "flex"} : {display: "none"}} id='mintButtonContainer2' className='mintButtonContainer2 oracleguiContentContainer_Right oracleguiContentContainer contentContainer'>
+            <div id='oracleguiButtonContainer_Mint' className='oracleguiButtonContainer_Mint oracleguiButtonContainer buttonContainer'>
+              <span data-aos="fade-left" onClick={onMouseClick} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} id='mintCustomText' className='mintCustomText oracleguiMintCustomText oracleguiMintButtonText oracleguiText oracleguiButtonText buttonText'>
+                Mint Custom Amount
+              </span>
+              <input data-aos="fade-left" id='mintCustomInput' className='mintCustomInput oracleguiInputField inputField oracleguiRightButtonText' placeholder="# of Copies" type="number" onChange={handleFieldChange} />
+            </div>
+          </div>
+          <div style={(user_address) ? {display: "flex"} : {display: "none"}} id='customPriceContainer' className='customPriceContainer oracleguiContentContainer_Right oracleguiContentContainer contentContainer'>
+            <div id='oracleguiTextContainer_TotalPrice' className='oracleguiTextContainer_TotalPrice oracleguiTextContainer textContainer'>
+              <span data-aos="fade-left" id='customPriceText' className='customPriceText oracleguiText oracleguiFloatingText floatingText'>
+                Total Price: 0.0 ETH
+              </span>
+            </div>
+          </div>
+          <div style={(user_address) ? {display: "flex"} : {display: "none"}} id='readButtonContainer' className='readButtonContainer oracleguiContentContainer_Right oracleguiContentContainer contentContainer'>
+            <div id='oracleguiButtonContainer_Read' className='oracleguiButtonContainer_Read oracleguiButtonContainer buttonContainer'>
+              <span data-aos="fade-left" onClick={onMouseClick} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} id='readComicText' className='readComicText oracleguiReadText oracleguiMintButtonText oracleguiText oracleguiButtonText buttonText'>
+                Read Comic
+              </span>
+              <span data-aos="fade-left" onClick={onMouseClick} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} id='viewOnOpenseaText' className='viewOnOpenseaText oracleguiReadText oracleguiMintButtonText oracleguiText oracleguiButtonText buttonText oracleguiRightButtonText'>
+                View on OpenSea
+              </span>
+            </div>
+          </div>
+          {/* <div id='infoButtonContainer' className='infoButtonsContainer oracleguiContentContainer_Right oracleguiContentContainer contentContainer'>
+            <div id='oracleguiButtonContainer_Info' className='oracleguiButtonContainer_Info oracleguiButtonContainer buttonContainer'>
+              <span data-aos="fade-left" onClick={onMouseClick} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} alt='Connect Wallet' id='connectButtonText' className='connectButtonText oracleguiButtonText buttonText'>
+                Connect Wallet
+              </span>
+            </div>
+          </div> */}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default OracleGUI
