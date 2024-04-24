@@ -1,7 +1,7 @@
 import React from 'react'; 
 
-import banner_image from '../../image/meliora-comic-banner-2.png';
-import collect_forever_onchain_image from '../../image/collect-forever-onchain.png';
+import banner_image from '../../image/banner.png';
+import collect_forever_onchain_image from '../../image/sub-banner.png';
 
 import './banner.css'
 
@@ -13,8 +13,8 @@ const Banner = () => {
       <div className='bannerContainer'>
         <img data-aos="fade-left" src={banner_image} alt='' className='bannerImage' />
       </div>
-      <div className='bannerContainer collectForeverBannerContainer'>
-        <img data-aos="fade-left" src={collect_forever_onchain_image} alt='' id='collectForeverBanner' className='collectForeverBannerImage'  />
+      <div className='bannerContainer subBannerBannerContainer'>
+        <img data-aos="fade-left" src={collect_forever_onchain_image} alt='' id='subBannerBanner' className='subBannerBannerImage'  />
       </div>
     </div>
   )
