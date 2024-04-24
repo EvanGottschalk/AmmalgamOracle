@@ -122,7 +122,7 @@
   cursor: default;
 }
 
-.comicDescriptionContainer {
+.oracleDescriptionContainer {
   border-color: #00ECC3;
   border-width: 2px;
   border-style: solid;
@@ -207,7 +207,7 @@
     margin-left: 5vw;
   }
 
-  .comicCoverImage {
+  .oracleCoverImage {
     width: 80vw;
   }
 
@@ -248,7 +248,7 @@
     width: 33.5vw;
   }
 
-  .comicDescriptionContainer {
+  .oracleDescriptionContainer {
     margin-bottom: 10%;
   }
 

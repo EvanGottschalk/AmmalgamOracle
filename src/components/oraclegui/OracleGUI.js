@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import SmartContractContext from '../../scripts/SmartContractContext';
 
 import Aos from "aos";
@@ -6,8 +6,8 @@ import "aos/dist/aos.css";
 
 import Moralis from 'moralis';
 
-import { connectWallet, runContractFunction } from '../../scripts/SmartContractOperator';
-import { getOpenSeaLink } from '../../scripts/SmartContractOperator';
+import { connectWallet } from '../../scripts/SmartContractOperator';
+
 
 
 import './oraclegui.css';
@@ -17,7 +17,7 @@ require('dotenv').config();
 
 let MORALIS_API_KEY = process.env.MORALIS_API_KEY;
 
-var opensea_link = '';
+
 var symbol = 'ETH';
 var user_balances = {};
 var token_balance = 0;
@@ -57,15 +57,10 @@ const OracleGUI = () => {
   let { user_address, setAddress_Context } = useContext(SmartContractContext);
   let { user_balance, setBalance_Context } = useContext(SmartContractContext);
   let { network_name, setNetwork_Context } = useContext(SmartContractContext);
-  let { user_token_ID, setTokenID_Context } = useContext(SmartContractContext);
-  let { user_metadata, setMetadata_Context } = useContext(SmartContractContext);
-  let { user_avatar_URI, setAvatarURI_Context } = useContext(SmartContractContext);
-  let { contract_name, setContractName_Context } = useContext(SmartContractContext);
 
-  // network_name = 'mainnet';
-  contract_name = 'MelioraComicV1';
+
+
   user_address = false;
-  var total_minted = 0; //runContractFunction(contract_name, 'getTotalSupply');
 
   function onMouseOver(event) {
     let element = document.getElementById(event.target.id);
@@ -182,7 +177,7 @@ const OracleGUI = () => {
       <div id='oracleguiComponentContainer' className='oracleguiComponentContainer componentContainer'>
         <div id='oracleguiLeftContainer' className='oracleguiLeftContainer oracleguiSideContainer sideContainer leftContainer'>
           <div id='oracleguiContentContainer_Left' className='oracleguiContentContainer_Left oracleguiContentContainer contentContainer'>
-            <div id='oracleguiImageContainer1_Comic' className='oracleguiImageContainer1_Comic imageContainer'>
+            <div id='oracleguiImageContainer1_Oracle' className='oracleguiImageContainer1_Oracle imageContainer'>
               <div className="tradingview-widget-container" id="tradingViewContainer" ref={container}>
                 <div className="tradingview-widget-container__widget" id="tradingViewChart"></div>
               </div>
@@ -192,7 +187,7 @@ const OracleGUI = () => {
       </div>
       <div id='oracleguiComponentContainer' className='oracleguiComponentContainer componentContainer'>
         <div id='oracleguiRightContainer' className='oracleguiRightContainer oracleguiSideContainer sideContainer rightContainer'>
-          <div id='comicDescriptionContainer' className='comicDescriptionContainer oracleguiContentContainer_Right oracleguiContentContainer contentContainer'>
+          <div id='oracleDescriptionContainer' className='oracleDescriptionContainer oracleguiContentContainer_Right oracleguiContentContainer contentContainer'>
             <div id='oracleguiButtonContainer_Mint' className='oracleguiButtonContainer_Select oracleguiButtonContainer buttonContainer'>
               <span data-aos="fade-left" onClick={onMouseClick} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} id='selectTokenText' className='selectTokenText oracleguiText buttonText'>
                 Select Token:

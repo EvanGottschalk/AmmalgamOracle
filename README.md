@@ -1,6 +1,6 @@
 <!--
 *** Do a search and replace for the following:
-*** EvanGottschalk, repo_name, EvanOnEarth_eth, evan.blockchain@gmail.com, project_description
+*** EvanGottschalk, AmmalgamOracle, EvanOnEarth_eth, evan.blockchain@gmail.com, simple UI for checking token prices and balances
 -->
 
 <!-- PROJECT SHIELDS -->
@@ -23,26 +23,26 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <!--   <a href="https://github.com/EvanGottschalk/repo_name">
+  <!--   <a href="https://github.com/EvanGottschalk/AmmalgamOracle">
     <img src="README_images/logo.png" alt="Logo" width="250" height="130">
   </a> -->
-  <a href="https://github.com/EvanGottschalk/repo_name">
-    <img src="README_images/banner.png" alt="repo_name" height="200">
+  <a href="https://github.com/EvanGottschalk/AmmalgamOracle">
+    <img src="README_images/banner.png" alt="AmmalgamOracle" height="200">
   </a>
 
-  <h3 align="center">repo_name</h3>
+  <h3 align="center">AmmalgamOracle</h3>
 
   <p align="center">
-    A project_description
+    A simple UI for checking token prices and balances
     <br />
-    <a href="https://github.com/EvanGottschalk/repo_name"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/EvanGottschalk/AmmalgamOracle"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/EvanGottschalk/repo_name">View Demo</a>
+    <a href="https://github.com/EvanGottschalk/AmmalgamOracle">View Demo</a>
     ·
-    <a href="https://github.com/EvanGottschalk/repo_name/issues">Report Bug</a>
+    <a href="https://github.com/EvanGottschalk/AmmalgamOracle/issues">Report Bug</a>
     ·
-    <a href="https://github.com/EvanGottschalk/repo_name/issues">Request Feature</a>
+    <a href="https://github.com/EvanGottschalk/AmmalgamOracle/issues">Request Feature</a>
   </p>
 </p>
 
@@ -95,13 +95,12 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-`repo_name` is a project_description
-
-MORE_DESCRIPTION
+`AmmalgamOracle` is a simple UI for checking token prices and balances.
 
 
-<a href="https://github.com/EvanGottschalk/repo_name">
-  <img src="README_images/screenshot.png" alt="repo_name in action" height="200">
+
+<a href="https://github.com/EvanGottschalk/AmmalgamOracle">
+  <img src="README_images/screenshot.png" alt="AmmalgamOracle in action" height="200">
 </a>
 
 
@@ -114,8 +113,10 @@ MORE_DESCRIPTION
 
 ### Built With
 
-* [MetaBoss](https://metaboss.rs/) - this amazing library provides functions for creating and interacting with SPL tokens
-* [@solana/web3.js](https://solana-labs.github.io/solana-web3.js/) - this library provides fundamental tools for interacting with the Solana blockchain
+* [Ammalgam](https://ammalgam.xyz/) - Unprecedented Capital Efficiency
+* [ethers.js](https://docs.ethers.org/v5/) - provides fundamental tools for interacting with EVM blockchains
+* [Trading View](https://tradingview.com) - provides API endpoints for token price charts
+* [Moralis](https://moralis.io/) - provides API endpoints for token balances
 
 
 
@@ -146,7 +147,7 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-`repo_name` requires Node version 18.19.0 or later.
+`AmmalgamOracle` requires Node version 16 or later.
 
 
 
@@ -161,7 +162,7 @@ To get a local copy up and running follow these simple steps.
 
 1. Clone this repository
    ```
-   git clone https://github.com/EvanGottschalk/repo_name
+   git clone https://github.com/EvanGottschalk/AmmalgamOracle
    ```
 2. Initialize a new Node project
    ```
@@ -171,13 +172,14 @@ To get a local copy up and running follow these simple steps.
    ```
    yarn install
    ```
-4. Install Metaboss
+4. Create the React app
    ```
-   yarn install metaboss
+   npx create-react-app frontend
    ```
-5. Run the program
+5. Update the .env file with your Moralis API key
+6. Run the program
    ```
-   npx run scripts/repo_name.js
+   yarn start
    ```
 
 
@@ -192,13 +194,7 @@ To get a local copy up and running follow these simple steps.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-After getting the program running, you can use a test wallet address, or the address from your web wallet. To use your web wallet, first get the private key, and then derive the keypair array using `repo_name`
-
-Once you have your keypair file, you are ready to go! `repo_name` can be used to mint NFTs and fungible tokens on Solana's mainnet and devnet.
-
-On devnet, you can use `repo_name` to request an airdrop and start minting!
-
-On mainnet, you will have to first deposit some SOL into your wallet before you can start minting with `repo_name`.
+After getting the program running, you can enter different token symbols into the search field to see their price histories. If your web wallet is connected, you'll also see the balance of the input token in the connected wallet.
 
 
 
@@ -212,13 +208,13 @@ On mainnet, you will have to first deposit some SOL into your wallet before you 
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/EvanGottschalk/repo_name/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/EvanGottschalk/AmmalgamOracle/issues) for a list of proposed features (and known issues).
 
 ### Upcoming Features
 
-* feature_1
-* feature_2
-* feature_3
+* Support for more chains (e.g. Solana, Algorand)
+* Basic trading via DEX's (e.g. Uniswap, Sushiswap)
+* Options and futures trading via futuristic AMM's (e.g. [Ammalgam](https://ammalgam.xyz/))
 
 
 
@@ -271,7 +267,7 @@ Distributed under the GNU GPL-3 License. See `LICENSE` for more information.
 
 Evan Gottschalk - [@EvanOnEarth_eth](https://twitter.com/EvanOnEarth_eth) - evan.blockchain@gmail.com
 
-Project Link: [https://github.com/EvanGottschalk/repo_name](https://github.com/EvanGottschalk/repo_name)
+Project Link: [https://github.com/EvanGottschalk/AmmalgamOracle](https://github.com/EvanGottschalk/AmmalgamOracle)
 
 
 
@@ -295,15 +291,15 @@ Thinking about contributing to this project? Please do! Your Github username wil
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/EvanGottschalk/repo_name.svg?style=for-the-badge
-[contributors-url]: https://github.com/EvanGottschalk/repo_name/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/EvanGottschalk/repo_name.svg?style=for-the-badge
-[forks-url]: https://github.com/EvanGottschalk/repo_name/network/members
-[stars-shield]: https://img.shields.io/github/stars/EvanGottschalk/repo_name.svg?style=for-the-badge
-[stars-url]: https://github.com/EvanGottschalk/repo_name/stargazers
-[issues-shield]: https://img.shields.io/github/issues/EvanGottschalk/repo_name.svg?style=for-the-badge
-[issues-url]: https://github.com/EvanGottschalk/repo_name/issues
-[license-shield]: https://img.shields.io/github/license/EvanGottschalk/repo_name.svg?style=for-the-badge
-[license-url]: https://github.com/EvanGottschalk/repo_name/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/EvanGottschalk/AmmalgamOracle.svg?style=for-the-badge
+[contributors-url]: https://github.com/EvanGottschalk/AmmalgamOracle/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/EvanGottschalk/AmmalgamOracle.svg?style=for-the-badge
+[forks-url]: https://github.com/EvanGottschalk/AmmalgamOracle/network/members
+[stars-shield]: https://img.shields.io/github/stars/EvanGottschalk/AmmalgamOracle.svg?style=for-the-badge
+[stars-url]: https://github.com/EvanGottschalk/AmmalgamOracle/stargazers
+[issues-shield]: https://img.shields.io/github/issues/EvanGottschalk/AmmalgamOracle.svg?style=for-the-badge
+[issues-url]: https://github.com/EvanGottschalk/AmmalgamOracle/issues
+[license-shield]: https://img.shields.io/github/license/EvanGottschalk/AmmalgamOracle.svg?style=for-the-badge
+[license-url]: https://github.com/EvanGottschalk/AmmalgamOracle/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/EvanGottschalk
