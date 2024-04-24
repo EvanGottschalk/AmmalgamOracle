@@ -100,7 +100,7 @@
 
 
 <a href="https://github.com/EvanGottschalk/AmmalgamOracle">
-  <img src="README_images/screenshot.PNG" alt="AmmalgamOracle in action" height="200">
+  <img src="README_images/screenshot.PNG" alt="AmmalgamOracle in action" height="400">
 </a>
 
 
