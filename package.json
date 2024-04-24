@@ -3,7 +3,7 @@
   "homepage": "https://melioramint.com",
   "version": "4.20.69",
   "engines": {
-    "node": "16.13.1"
+    "node": "16.x"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.6.1",
